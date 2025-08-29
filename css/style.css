@@ -1,0 +1,228 @@
+/* --- GERAL & RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.container {
+    width: 100%;
+    padding: 20px;
+}
+.hidden {
+    display: none !important;
+}
+
+/* --- TELA DE LOGIN & CADASTRO --- */
+.login-box {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.logo {
+    max-width: 150px;
+    margin-bottom: 20px;
+}
+.login-box h1 {
+    margin-bottom: 10px;
+    color: #1a237e;
+}
+.login-box p {
+    margin-bottom: 30px;
+    color: #555;
+}
+.input-group {
+    position: relative;
+    text-align: left;
+    margin-bottom: 20px;
+}
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 0.9em;
+}
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+}
+button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background-color: #3949ab;
+    color: white;
+    font-size: 1.1em;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+button[type="submit"]:hover {
+    background-color: #283593;
+}
+button[type="submit"]:disabled {
+    background-color: #9fa8da;
+    cursor: not-allowed;
+}
+.error-feedback {
+    color: #d32f2f;
+    font-weight: 600;
+    margin-top: 15px;
+    height: 20px;
+}
+
+/* Checkbox para visualizar senha */
+.password-field { /* Usado para agrupar input e checkbox */
+    margin-bottom: 10px; /* Reduz margem do grupo do input para o checkbox ficar mais perto */
+}
+
+.password-toggle-checkbox {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.password-toggle-checkbox input[type="checkbox"] {
+    width: auto; /* Deixa o checkbox ter o tamanho padrão */
+    margin-right: 8px;
+    accent-color: #3949ab; /* Cor do checkbox quando marcado */
+    cursor: pointer;
+}
+
+.password-toggle-checkbox label {
+    margin-bottom: 0; /* Remove a margem extra do label */
+    cursor: pointer;
+    font-weight: normal; /* Não deixa o texto em negrito */
+}
+
+/* Remove o estilo do botão de olho, já que não o usamos mais */
+.toggle-password {
+    display: none; 
+}
+
+
+/* --- ÁREA DO ALUNO --- */
+#student-area {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.profile-header {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+.profile-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #3949ab;
+}
+.profile-info h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #1a237e;
+}
+.profile-info p {
+    margin: 5px 0 0;
+    color: #555;
+}
+#logout-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: auto;
+    padding: 8px 15px;
+    font-size: 0.9em;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+#logout-button:hover {
+    background-color: #d32f2f;
+}
+.grades-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+.grade-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+.grade-card h3 {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 10px;
+}
+.grade {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #3949ab;
+}
+/* Estilo específico para o card de Média Final */
+.grade-card.final-average {
+    background-color: #1a237e; /* Fundo azul escuro */
+}
+.grade-card.final-average h3 {
+    color: #c5cae9; /* Título claro no fundo escuro */
+}
+.grade-card.final-average .grade {
+    color: #fff; /* Nota branca no fundo escuro */
+}
+
+.card-container {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+.chart-wrapper {
+    position: relative;
+    height: 300px; /* Altura fixa para o gráfico */
+    width: 100%;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    .grades-summary { grid-template-columns: repeat(2, 1fr); }
+    .profile-header { flex-direction: column; text-align: center; }
+    #logout-button { position: static; margin-top: 15px; width: 100%; }
+}
+@media (max-width: 480px) {
+    .login-box { padding: 25px; }
+    .grades-summary { grid-template-columns: 1fr; }
+    .profile-photo { width: 100px; height: 100px; }
+    .profile-info h2 { font-size: 1.3em; }
+}

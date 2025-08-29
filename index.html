@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal do Educando</title>
+    
+    <link rel="stylesheet" href="./css/style.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+</head>
+<body>
+
+    <div id="login-container" class="container">
+        <div class="login-box">
+            <img src="URL_DO_SEU_LOGOTIPO_AQUI" alt="Logotipo da Instituição" class="logo">
+            <h1 id="login-title">Acesso ao Portal</h1>
+            <p id="login-subtitle">Use seu ID e senha (ou código de acesso).</p>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="student-id">ID do Aluno (Matrícula)</label>
+                    <input type="text" id="student-id" placeholder="Digite seu ID" required>
+                </div>
+                <div class="input-group password-field">
+                    <label for="password">Senha ou Código Temporário</label>
+                    <input type="password" id="password" placeholder="Digite sua senha" required>
+                    <div class="password-toggle-checkbox">
+                        <input type="checkbox" id="toggle-login-password">
+                        <label for="toggle-login-password">Ver caracteres</label>
+                    </div>
+                </div>
+                <button type="submit">Acessar</button>
+                <p id="login-error-message" class="error-feedback"></p>
+            </form>
+        </div>
+    </div>
+
+    <div id="password-setup-container" class="container hidden">
+        <div class="login-box">
+            <h1>Crie sua Senha</h1>
+            <p>Este é seu primeiro acesso. Por favor, crie uma senha de 4 números.</p>
+            <form id="password-setup-form">
+                <div class="input-group password-field">
+                    <label for="new-password">Nova Senha (4 números)</label>
+                    <input type="password" id="new-password" inputmode="numeric" pattern="\d{4}" maxlength="4" required>
+                    <div class="password-toggle-checkbox">
+                        <input type="checkbox" id="toggle-new-password">
+                        <label for="toggle-new-password">Ver caracteres</label>
+                    </div>
+                </div>
+                <div class="input-group password-field">
+                    <label for="confirm-password">Confirme a Nova Senha</label>
+                    <input type="password" id="confirm-password" inputmode="numeric" pattern="\d{4}" maxlength="4" required>
+                    <div class="password-toggle-checkbox">
+                        <input type="checkbox" id="toggle-confirm-password">
+                        <label for="toggle-confirm-password">Ver caracteres</label>
+                    </div>
+                </div>
+                <button type="submit">Cadastrar Senha</button>
+                <p id="password-error-message" class="error-feedback"></p>
+            </form>
+        </div>
+    </div>
+
+    <main id="student-area" class="container hidden">
+        <header class="profile-header">
+            <img id="student-photo" src="" alt="Foto do Educando" class="profile-photo">
+            <div class="profile-info">
+                <h2 id="student-name">Nome Completo do Educando</h2>
+                <p><strong>Curso:</strong> <span id="student-course"></span></p>
+                <p><strong>Turma:</strong> <span id="student-class"></span></p>
+            </div>
+            <button id="logout-button">Sair</button>
+        </header>
+        <section class="grades-summary">
+             <div class="grade-card"><h3>UX UI Design</h3><p class="grade" id="grade-ux">0</p></div>
+             <div class="grade-card"><h3>HTML 5 & CSS 3</h3><p class="grade" id="grade-html">0</p></div>
+             <div class="grade-card"><h3>Projeto Final</h3><p class="grade" id="grade-project">0</p></div>
+             
+             <div class="grade-card final-average">
+                 <h3>Média Final</h3>
+                 <p class="grade" id="grade-final">0.0</p> </div>
+        </section>
+        
+        <section class="card-container">
+            <h3>Desempenho nos Módulos</h3>
+            <div class="chart-wrapper">
+                <canvas id="performanceChart"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <script src="./js/script.js" defer></script>
+</body>
+</html>
