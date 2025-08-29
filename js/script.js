@@ -1,6 +1,7 @@
 // --- CONFIGURAÇÃO ---
 const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ9cvTebnz9iwpPCorijfmorLPU-h1nKhBksdduC0lowsLWOAPb30Lce96Z-wsZPiIhOQy0N08T-wUo/pub?output=csv';
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyupx9Onknj43wG1tAbxD2wBiNT_4LBgmhzLr5zEwaPubmBEkOgoAyZWl4sUHJrtKw6/exec';
+const FOTO_PADRAO_URL = 'https://i.imgur.com/3c8l2K6.png'; // URL de uma foto padrão/placeholder
 
 // --- ELEMENTOS DO DOM ---
 const loginContainer = document.getElementById('login-container');
@@ -60,9 +61,6 @@ loginForm.addEventListener('submit', async (event) => {
 
     if (!students) return;
     const student = students.find(s => s.ID_Aluno === studentId);
-    
-    // LINHA DE DIAGNÓSTICO: Verifique o console (F12) para ver os dados do aluno que foram encontrados
-    console.log("Dados do aluno encontrado:", student);
 
     if (!student) {
         loginErrorMessage.textContent = 'ID do Aluno não encontrado.';
@@ -83,6 +81,7 @@ loginForm.addEventListener('submit', async (event) => {
 
 passwordSetupForm.addEventListener('submit', async (event) => {
     event.preventDefault();
+    // ... (O restante desta função continua exatamente igual)
     passwordErrorMessage.textContent = '';
     const newPassword = newPasswordInput.value;
     const confirmPassword = confirmPasswordInput.value;
@@ -122,10 +121,8 @@ passwordSetupForm.addEventListener('submit', async (event) => {
     }
 });
 
-// Lógica para todos os checkboxes de "Ver caracteres"
 document.querySelectorAll('.password-toggle-checkbox input[type="checkbox"]').forEach(checkbox => {
     checkbox.addEventListener('change', function () {
-        // Encontra o input de senha mais próximo dentro do mesmo grupo
         const input = this.closest('.input-group').querySelector('input[type="password"], input[type="text"]');
         if (input) {
             input.setAttribute('type', this.checked ? 'text' : 'password');
@@ -138,30 +135,31 @@ let performanceChart = null;
 const logoutButton = document.getElementById('logout-button');
 
 function populateStudentArea(student) {
-    document.getElementById('student-photo').src = student.FotoURL;
+    document.getElementById('student-photo').src = student.FotoURL || FOTO_PADRAO_URL;
     document.getElementById('student-name').textContent = student.NomeCompleto;
     document.getElementById('student-course').textContent = student.Curso;
     document.getElementById('student-class').textContent = student.Turma;
     
-    // Certifique-se de que os valores são tratados como números, substituindo vírgula por ponto
-    const notaUX = parseFloat(student.NotaUX.replace(',', '.'));
-    const notaHTML = parseFloat(student.NotaHTML.replace(',', '.'));
-    const notaProjeto = parseFloat(student.NotaProjeto.replace(',', '.'));
-    const mediaFinal = parseFloat(student.MediaFinal.replace(',', '.'));
+    const notaUXValue = student.NotaUX || "0";
+    const notaHTMLValue = student.NotaHTML || "0";
+    const notaProjetoValue = student.NotaProjeto || "0";
+    const mediaFinalValue = student.MediaFinal || "0";
 
-    // Adicionado console.log para depuração da média final
-    console.log("Média Final recebida e processada:", mediaFinal);
+    const notaUX = parseFloat(notaUXValue.replace(',', '.'));
+    const notaHTML = parseFloat(notaHTMLValue.replace(',', '.'));
+    const notaProjeto = parseFloat(notaProjetoValue.replace(',', '.'));
+    const mediaFinal = parseFloat(mediaFinalValue.replace(',', '.'));
 
     document.getElementById('grade-ux').textContent = isNaN(notaUX) ? '0.0' : notaUX.toFixed(1);
     document.getElementById('grade-html').textContent = isNaN(notaHTML) ? '0.0' : notaHTML.toFixed(1);
     document.getElementById('grade-project').textContent = isNaN(notaProjeto) ? '0.0' : notaProjeto.toFixed(1);
-    // Definindo um valor padrão '0.0' se não for um número válido
     document.getElementById('grade-final').textContent = isNaN(mediaFinal) ? '0.0' : mediaFinal.toFixed(1);
     
     createChart([notaUX, notaHTML, notaProjeto]);
 }
 
 function createChart(grades) {
+    // ... (Esta função continua exatamente igual)
     const ctx = document.getElementById('performanceChart').getContext('2d');
     if (performanceChart) performanceChart.destroy();
     performanceChart = new Chart(ctx, {
@@ -195,6 +193,7 @@ function createChart(grades) {
 }
 
 logoutButton.addEventListener('click', () => {
+    // ... (Esta função continua exatamente igual)
     studentArea.classList.add('hidden');
     passwordSetupContainer.classList.add('hidden');
     loginContainer.classList.remove('hidden');
